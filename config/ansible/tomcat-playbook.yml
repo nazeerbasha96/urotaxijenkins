@@ -1,0 +1,12 @@
+---
+- name: tomcat play
+  hosts: all
+  roles: 
+  - appdeploy
+  
+...
+
+      
+
+
+

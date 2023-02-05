@@ -1,0 +1,21 @@
+[Unit]
+Description=Apache tomcat server
+After=network.target
+
+[Service]
+Type=forking
+Environment=JAVA_HOME={{java_home.stdout}}
+Environment=CATALINA_HOME={{tomcat_install_dir}}/{{tomcat_download_dir}}
+Environment=CATALINA_BASE={{tomcat_install_dir}}/{{tomcat_download_dir}}
+
+ExecStart={{tomcat_install_dir}}/{{tomcat_download_dir}}/bin/startup.sh
+ExecStop={{tomcat_install_dir}}/{{tomcat_download_dir}}/bin/shutdown.sh
+
+
+User={{tomcat_os_user}}
+Group={{tomcat_os_group}}
+RestartSec=20
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

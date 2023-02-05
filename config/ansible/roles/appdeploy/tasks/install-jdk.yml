@@ -1,0 +1,10 @@
+- name: install jdk11
+  apt:
+    name: "{{jdk_pgk}}"
+    state: present
+    update_cache: yes
+  become: yes
+- name: setup java home evnroniment
+  shell: readlink -f $(which java) | sed 's/bin.*//g'
+  register: java_home
+  

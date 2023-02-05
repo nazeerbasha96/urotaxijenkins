@@ -1,0 +1,7 @@
+- name: delopy war file
+  copy:
+    src: "{{lookup ('env','WORKSPACE') }}/target/urotaxi.war"
+    dest: "{{tomcat_install_dir}}/{{tomcat_download_dir}}/webapps/"
+  notify:
+    - tomcatrestart
+    

@@ -1,0 +1,19 @@
+---
+- name: create tomcat user
+  user: 
+    name: "{{tomcat_os_user}}"
+    create_home: yes
+    shell: /bin/bash
+    state: present
+  become: yes
+  
+- name: create midlleware directory
+  file: 
+    path: "{{tomcat_install_dir}}"
+    state: directory
+    owner: "{{tomcat_os_user}}"
+    group: "{{tomcat_os_group}}"
+    mode: "0755"
+    recurse: yes
+  become: yes
+  become_method: sudo

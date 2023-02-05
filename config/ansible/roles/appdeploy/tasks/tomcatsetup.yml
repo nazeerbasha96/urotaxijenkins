@@ -1,0 +1,21 @@
+---
+- name: download tomcat
+  get_url: 
+    url: "{{tomcat_download_url}}"
+    dest: "{{tomcat_install_dir}}"
+    mode: "0755"
+    owner: "{{tomcat_os_user}}"
+    group: "{{tomcat_os_group}}"
+  become: yes
+- name: unzip tomcat file
+  unarchive:
+    src: "{{tomcat_install_dir}}/{{tomcat_download_dir}}.tar.gz"
+    dest: "{{tomcat_install_dir}}"
+    owner: "{{tomcat_os_user}}"
+    group: "{{tomcat_os_group}}"
+    
+    remote_src: true
+    mode: "0755"
+  become: yes
+  become_method: sudo
+
