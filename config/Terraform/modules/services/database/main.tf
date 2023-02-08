@@ -1,7 +1,7 @@
 resource "aws_security_group" "db_sg" {
   vpc_id = var.vpc_id
-  ingress = {
-    cidr_block  = var.db_cidr
+  ingress {
+    cidr_blocks = var.db_cidr
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
@@ -28,8 +28,8 @@ resource "aws_db_instance" "urotaxi_db" {
   instance_class         = var.instance_class
   username               = var.db_username
   password               = var.db_password
-  db_subnet_group_name   = aws_db_subnet_group.db_subnetgroup.id
-  vpc_security_group_ids = [aws.aws_security_group.db_sg.id]
+  db_subnet_group_name   = aws_db_subnet_group.db_subnetgroup.name
+  vpc_security_group_ids = [aws_security_group.db_sg.id]
   skip_final_snapshot    = true
   tags = {
     "Name" = var.db_name

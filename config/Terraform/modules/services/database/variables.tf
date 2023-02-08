@@ -14,10 +14,10 @@ variable "db_password" {
   type = string
 }
 variable "subnet_id" {
-  type = string
+  type = list
 }
 variable "db_cidr" {
-  type = string
+  type = list(string)
 }
 variable "db_subnet_group_name" {
   type = string

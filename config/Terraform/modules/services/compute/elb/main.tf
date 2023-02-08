@@ -18,12 +18,12 @@ resource "aws_security_group" "lbr_sg" {
 }
 resource "aws_lb_target_group" "lbr_tg" {
   health_check {
-    interval = 30
+    interval = 40
     #path = "/fithealth2/healthcheck"
     protocol            = "HTTP"
-    timeout             = 3
+    timeout             = 5
     healthy_threshold   = 5
-    unhealthy_threshold = 2
+    unhealthy_threshold = 4
   }
   name     = var.tg_name
   port     = 8080

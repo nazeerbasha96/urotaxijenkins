@@ -13,7 +13,7 @@ variable "ami" {
 variable "associate_public_ip_address" {
   type = string
 }
-variable "ec2_instance_type" {
+variable "instance_type" {
   type = string
 }
 variable "key_name" {
