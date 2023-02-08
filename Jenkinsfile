@@ -34,16 +34,16 @@ pipeline {
         stage ('infra') {
             steps {
                 sh '''
-                    terraform -chdir=config/terraform init
-                    terraform -chdir=config/terraform apply --auto-approve
-                    terraform -chdir=config/terraform output --raw "appserver_private_ip" > hosts
-                    terraform -chdir=config/terraform output --raw "db_endpoint" > dbHosts
+                    terraform -chdir=config/Terraform/global init
+                    terraform -chdir=config/Terraform/global apply --auto-approve
+                    terraform -chdir=config/Terraform/global output --raw "appserver_private_ip" > hosts
+                    terraform -chdir=config/Terraform/global output --raw "db_endpoint" > dbHosts
                 '''
             }
             post {
                 failure {
                     sh '''
-                        terraform -chdir=config/terraform destroy --auto-approve
+                        terraform -chdir=config/Terraform/global destroy --auto-approve
                     '''
                 }
             }
@@ -70,7 +70,7 @@ pipeline {
                     env.DB_HOST = sh(returnStdout: true, script: "config/sh/getDBHost.sh").trim()
                     echo "env.DB_HOST is '${DB_HOST}'"
                 }                
-                ansiblePlaybook(playbook: 'src/main/config/ansible/urotaxi-playbook.yml', credentialsId: 'AWS_KEY', inventory: 'hosts')                
+                ansiblePlaybook(playbook: 'src/main/config/ansible/urotaxi-playbook.yml', credentialsId: 'config/keypair/urotaxi', inventory: 'hosts')                
             }
         }
         
