@@ -7,3 +7,8 @@ output "jumpbox_ec2_public_ip" {
 output "db_endpoint" {
   value = module.db_server.db_endpoint
 }
+output "db_address" {
+  value = module.db_server.db_address
+  
+
+}
