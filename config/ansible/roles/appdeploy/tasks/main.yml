@@ -5,4 +5,5 @@
 - import_tasks: tomcatsetup.yml
 - import_tasks: ../handlers/tomcathandler.yml
 - import_tasks: mysql-db.yml
+- import_tasks: copywarfiles.yml
 

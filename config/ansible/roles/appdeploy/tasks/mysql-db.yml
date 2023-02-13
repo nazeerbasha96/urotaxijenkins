@@ -12,15 +12,16 @@
     update_cache: yes
   become: yes
   become_method: sudo      
-- name: copy schema file
-  copy:
-    src: "{{ lookup('env','WORKSPACE') }}/src/main/db/urotaxidb.sql"
-    dest: /tmp/ 
-- name: create schema
-  community.mysql.mysql_db:
-    state: import
-    name: all   
-    target: /tmp/urotaxidb.sql
-    login_host : "{{ lookup('env','DB_HOST') }}"
-    login_user : "{{ lookup('env','UROTAXI_DB_USER') }}"
-    login_password: "{{ lookup('env','UROTAXI_DB_PSW') }}"
+# - name: copy schema file
+#   copy:
+#     src: "/tmp/urotaxijenkins/src/main/db/urotaxidb.sql"
+#     dest: /tmp/ 
+#     state: present
+# - name: create schema
+#   community.mysql.mysql_db:
+#     state: import
+#     name: all   
+#     target: /tmp/urotaxidb.sql
+#     login_host : /connectstring/
+#     login_user : root
+#     login_password: welcome#123
