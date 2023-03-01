@@ -1,14 +1,14 @@
 variable "vpc_id" {
-    type = string
+  type = string
 }
 variable "subnet_cidr" {
-    type = string
+  type = string
 }
 variable "availability_zone" {
-    type = string
-  
+  type = string
+
 }
 variable "subnet_name" {
-    type = string
-  
+  type = string
+
 }

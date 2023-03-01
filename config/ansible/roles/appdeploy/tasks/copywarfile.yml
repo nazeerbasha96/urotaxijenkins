@@ -2,6 +2,8 @@
   copy:
     src: "/tmp/urotaxijenkins/target/urotaxi.war"
     dest: "{{tomcat_install_dir}}/{{tomcat_download_dir}}/webapps/"
+  become: yes
+  become_method: sudo
   notify:
-    - tomcatrestart
+    - tomcathandler
     

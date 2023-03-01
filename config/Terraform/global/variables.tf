@@ -23,12 +23,12 @@ variable "ig_block" {
   })
 
 }
-variable "nat_block" {
-  type = object({
-    nat_name    = string
-    nat_rt_name = string
-  })
-}
+# variable "nat_block" {
+#   type = object({
+#     nat_name    = string
+#     nat_rt_name = string
+#   })
+# }
 variable "ec2_keypair" {
   type = object({
     key_name   = string

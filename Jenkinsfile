@@ -36,10 +36,11 @@ pipeline {
                 sh '''
                     terraform -chdir=config/Terraform/global init
                     terraform -chdir=config/Terraform/global apply --auto-approve
-                    terraform -chdir=config/Terraform/global output --raw "appserver_private_ip" > hosts
-                    terraform -chdir=config/Terraform/global output --raw "db_endpoint" > dbHosts
+                    terraform -chdir=config/Terraform/global output  "appserver_private_ip" > hosts
+                    terraform -chdir=config/Terraform/global output  "db_endpoint" > dbHosts
                 '''
             }
+        }
             post {
                 failure {
                     sh '''
@@ -47,9 +48,29 @@ pipeline {
                     '''
                 }
             }
+            stage('prepare') {
+                steps {
+                     sh '''
+                        dbHost=$(cat dbHosts)
+                        sed -i "s|#dbhost#|$dbHost|g" src/main/resources/application.yml
+                    '''
+                }
+            }
+        stage('package') {
+            steps {
+                sh 'mvn --batch-mode clean package -DskipTests=true'
+            }
         }
-       
-        
+        stage('deploy') {
+            steps {
+                sh 'sudo chmod u+x config/sh/getDBHost.sh'
+                script {
+                    env.DB_HOST = sh(returnStdout: true, script: "config/sh/getDBHost.sh").trim()
+                    echo "env.DB_HOST is '${DB_HOST}'"
+                }                
+                sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key config/keypair/urotaxi -i /tmp/urotaxihosts config/ansible/tomcat-playbook.yml'
+            }
+        }
     }
 }
 
