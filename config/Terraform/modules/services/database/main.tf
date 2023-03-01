@@ -24,7 +24,7 @@ resource "aws_db_instance" "urotaxi_db" {
   allocated_storage      = var.allocated_storage
   db_name                = var.db_name
   engine                 = "mysql"
-  engine_version         = "8.0.30"
+  engine_version         = "8.0.31"
   instance_class         = var.instance_class
   username               = var.db_username
   password               = var.db_password
