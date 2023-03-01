@@ -105,7 +105,7 @@ module "lbr" {
   lbr_name  = var.lbr_config.lbr_name
   depends_on = [
     module.application_server,
-    resource.null_resource.config_file_copy
+    # resource.null_resource.config_file_copy
   ]
 }
 # resource "null_resource" "config_file_copy" {

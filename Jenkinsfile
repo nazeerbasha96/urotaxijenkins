@@ -40,14 +40,15 @@ pipeline {
                     terraform -chdir=config/Terraform/global output  "db_endpoint" > dbHosts
                 '''
             }
-        }
             post {
-                failure {
-                    sh '''
-                        terraform -chdir=config/Terraform/global destroy --auto-approve
-                    '''
+            failure {
+                sh '''
+                    terraform -chdir=config/Terraform/global destroy --auto-approve
+                '''
                 }
             }
+        }
+        
             stage('prepare') {
                 steps {
                      sh '''
