@@ -36,8 +36,8 @@ pipeline {
                 sh '''
                     terraform -chdir=config/Terraform/global init
                     terraform -chdir=config/Terraform/global apply --auto-approve
-                    terraform -chdir=config/Terraform/global output  "appserver_private_ip" > hosts
-                    terraform -chdir=config/Terraform/global output  "db_endpoint" > dbHosts
+                    terraform -chdir=config/Terraform/global output  "appserver_public_ip" > hosts
+                    terraform -chdir=config/Terraform/global output  "db_address" > dbHosts
                 '''
             }
             post {
