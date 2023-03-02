@@ -6,8 +6,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://#dbhost#/urotaxidb
-    username: root
-    password: welcome#123
+    username: #dbusername#
+    password: #dbpassword#
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
