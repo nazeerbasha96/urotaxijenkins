@@ -127,8 +127,8 @@ resource "null_resource" "config_file_copy" {
       "sudo cp /tmp/urotaxijenkins/config/keypair/urotaxi ~/.ssh/",
       "sudo chmod 600 /home/ubuntu/.ssh/urotaxi",
       "sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/urotaxi",
-      "sed -i 's/connectstring/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/src/main/resources/application.yml && mvn -f /tmp/urotaxijenkins/pom.xml clean verify",
-      "sed -i 's/connectstring/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/config/ansible/roles/appdeploy/tasks/mysql-db.yml",
+      "sed -i 's/#dbhost#/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/src/main/resources/application.yml && mvn -f /tmp/urotaxijenkins/pom.xml clean verify",
+      "sed -i 's/#dbhost#/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/config/ansible/roles/appdeploy/tasks/mysql-db.yml",
 
       "printf '%s\n%s' ${module.application_server.appserver_public_ip}  > /tmp/urotaxihosts",
       "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key ~/.ssh/urotaxi -i /tmp/urotaxihosts /tmp/urotaxijenkins/config/ansible/tomcat-playbook.yml",
