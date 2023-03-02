@@ -108,36 +108,36 @@ module "lbr" {
     resource.null_resource.config_file_copy
   ]
 }
-# resource "null_resource" "config_file_copy" {
-#   provisioner "remote-exec" {
-#     connection {
-#       type        = "ssh"
-#       host        = module.application_server.appserver_public_ip
-#       user        = "ubuntu"
-#       private_key = file("../../keypair/urotaxi")
-#     }
-#     inline = [
-#       "sudo apt update -y",
-#       "sudo apt install ansible -y",
-#       "sudo apt install openjdk-11-jdk -y",
-#       "sudo apt install mysql-client-8.0 -y",
-#       "sudo apt install maven -y",
-#       "cd /tmp/",
-#       "git clone https://github.com/nazeerbasha96/urotaxijenkins.git",
-#       "sudo cp /tmp/urotaxijenkins/config/keypair/urotaxi ~/.ssh/",
-#       "sudo chmod 600 /home/ubuntu/.ssh/urotaxi",
-#       "sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/urotaxi",
-#       "sed -i 's/connectstring/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/src/main/resources/application.yml && mvn -f /tmp/urotaxijenkins/pom.xml clean verify",
-#       "sed -i 's/connectstring/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/config/ansible/roles/appdeploy/tasks/mysql-db.yml",
+resource "null_resource" "config_file_copy" {
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      host        = module.application_server.appserver_public_ip
+      user        = "ubuntu"
+      private_key = file("../../keypair/urotaxi")
+    }
+    inline = [
+      "sudo apt update -y",
+      "sudo apt install ansible -y",
+      "sudo apt install openjdk-11-jdk -y",
+      "sudo apt install mysql-client-8.0 -y",
+      "sudo apt install maven -y",
+      "cd /tmp/",
+      "git clone https://github.com/nazeerbasha96/urotaxijenkins.git",
+      "sudo cp /tmp/urotaxijenkins/config/keypair/urotaxi ~/.ssh/",
+      "sudo chmod 600 /home/ubuntu/.ssh/urotaxi",
+      "sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/urotaxi",
+      "sed -i 's/connectstring/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/src/main/resources/application.yml && mvn -f /tmp/urotaxijenkins/pom.xml clean verify",
+      "sed -i 's/connectstring/${module.db_server.db_endpoint}/g' /tmp/urotaxijenkins/config/ansible/roles/appdeploy/tasks/mysql-db.yml",
 
-#       "printf '%s\n%s' ${module.application_server.appserver_public_ip}  > /tmp/urotaxihosts",
-#       "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key ~/.ssh/urotaxi -i /tmp/urotaxihosts /tmp/urotaxijenkins/config/ansible/tomcat-playbook.yml",
-#       "mysql -h ${module.db_server.db_address} -u${var.db_server.db_username} -p${var.db_server.db_password} < /tmp/urotaxijenkins/src/main/db/urotaxidb.sql"
-#     ]
+      "printf '%s\n%s' ${module.application_server.appserver_public_ip}  > /tmp/urotaxihosts",
+      "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key ~/.ssh/urotaxi -i /tmp/urotaxihosts /tmp/urotaxijenkins/config/ansible/tomcat-playbook.yml",
+      "mysql -h ${module.db_server.db_address} -u${var.db_server.db_username} -p${var.db_server.db_password} < /tmp/urotaxijenkins/src/main/db/urotaxidb.sql"
+    ]
 
 
-#   }
+  }
 
-# }
+}
 
 
