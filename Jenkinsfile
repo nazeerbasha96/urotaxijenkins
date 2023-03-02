@@ -17,7 +17,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     tools {
-        maven '3.8.6'
+        maven 'mvn3.8.7'
         terraform '21207'
     }
     stages {

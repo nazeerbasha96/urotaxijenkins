@@ -54,8 +54,8 @@ resource "aws_lb_target_group_attachment" "lbr_tg_attachment1" {
   target_id        = var.instance1
   port             = 8080
 }
-# resource "aws_lb_target_group_attachment" "lbr_tg_attachment2" {
-#   target_group_arn = aws_lb_target_group.lbr_tg.arn
-#   target_id        = var.instance2
-#   port             = 8080
-# }
+resource "aws_lb_target_group_attachment" "lbr_tg_attachment2" {
+  target_group_arn = aws_lb_target_group.lbr_tg.arn
+  target_id        = var.instance2
+  port             = 8080
+}

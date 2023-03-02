@@ -14,6 +14,6 @@ variable "subnet_id" {
 variable "instance1" {
   type = string
 }
-# variable "instance2" {
-#   type = string
-# }
+variable "instance2" {
+  type = string
+}
