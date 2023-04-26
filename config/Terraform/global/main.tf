@@ -130,8 +130,8 @@ resource "null_resource" "config_file_copy" {
       "sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/urotaxi",
       "sed -i 's/#dbhost#/${module.db_server.db_address}/g' /tmp/urotaxijenkins/src/main/resources/application.yml && mvn -f /tmp/urotaxijenkins/pom.xml clean verify",
       "sed -i 's/#dbhost#/${module.db_server.db_address}/g' /tmp/urotaxijenkins/config/ansible/roles/appdeploy/tasks/mysql-db.yml",
-      "sed -i 's#dbusername#${module.db_server.db_name}g' /tmp/urotaxijenkins/src/main/resources/application.yml",
-      "sed -i 's#dbusername#${module.db_server.db_password}g' /tmp/urotaxijenkins/src/main/resources/application.yml",
+      "sed -i 's#dbusername#${var.db_server.db_username}g' /tmp/urotaxijenkins/src/main/resources/application.yml",
+      "sed -i 's#dbusername#${var.db_server.db_password}g' /tmp/urotaxijenkins/src/main/resources/application.yml",
       "printf '%s\n%s' ${module.application_server[0].appserver_private_ip} ${module.application_server[1].appserver_private_ip} > /tmp/urotaxihosts",
       "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --private-key ~/.ssh/urotaxi -i /tmp/urotaxihosts /tmp/urotaxijenkins/config/ansible/tomcat-playbook.yml",
       "mysql -h ${module.db_server.db_address} -u${var.db_server.db_username} -p${var.db_server.db_password} < /tmp/urotaxijenkins/src/main/db/urotaxidb.sql"    
