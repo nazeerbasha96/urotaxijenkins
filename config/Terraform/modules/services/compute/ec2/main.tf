@@ -40,13 +40,6 @@ resource "aws_instance" "applicationserver" {
   tags = {
     "Name" = var.instance_name
   }
-  depends_on = [
-    aws_ec2_instance_state.applicationserver.state
-  ]
 
-
-}
-resource "aws_ec2_instance_state" "applicationserver" {
-  state = "running"
 
 }
