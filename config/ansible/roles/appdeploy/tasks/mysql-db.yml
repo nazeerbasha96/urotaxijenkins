@@ -1,0 +1,27 @@
+- name: install python3-pymysql
+  apt:
+    name: python3-pymysql
+    state: present
+    update_cache: yes
+  become: yes
+  become_method: sudo    
+- name: install mysql client
+  apt:
+    name: mysql-client-8.0
+    state: present
+    update_cache: yes
+  become: yes
+  become_method: sudo      
+# - name: copy schema file
+#   copy:
+#     src: "{{ lookup('env','WORKSPACE') }}/src/main/db/urotaxidb.sql"
+#     dest: /tmp/ 
+#     state: present
+# - name: create schema
+#   community.mysql.mysql_db:
+#     state: import
+#     name: all   
+#     target: /tmp/urotaxidb.sql
+#     login_host : "{{ lookup('env','DB_HOST') }}"
+#     login_user : root
+#     login_password: welcome#123

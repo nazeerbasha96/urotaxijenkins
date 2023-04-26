@@ -1,0 +1,12 @@
+- name: delopy war file
+  copy:
+    src: "/tmp/urotaxijenkins/target/urotaxi.war"
+    dest: "{{tomcat_install_dir}}/{{tomcat_download_dir}}/webapps/"
+    owner: "{{tomcat_os_user}}"
+    group: "{{tomcat_os_group}}"
+    mode: "0755"
+
+  become: yes
+  become_method: sudo
+  
+    

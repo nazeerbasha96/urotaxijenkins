@@ -1,0 +1,9 @@
+---
+- import_tasks: install-jdk.yml
+- import_tasks: tomcat-service.yml
+- import_tasks: tomcat-os-user.yml
+- import_tasks: tomcatsetup.yml
+- import_tasks: ../handlers/tomcathandler.yml
+- import_tasks: mysql-db.yml
+- import_tasks: copywarfile.yml
+
